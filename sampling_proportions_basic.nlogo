@@ -1,78 +1,78 @@
-breed [sampling-turtles sampling-turtle]
-globals [
-sample-number
-]
+  breed [sampling-turtles sampling-turtle]
 
-turtles-own [handedness]
-
-
-to setup
-  clear-all
-  crt number-of-people [
-    set color green
-    set size 1.5
-    fd random-float max-pxcor
-    repeat 200 [move]
+  globals [
+  sample-number
   ]
-  ask turtles [
-   set shape "left-handed"
-   set handedness "left"
-  ]
-  ask n-of (floor (right-handed-proportion * number-of-people) / 100) turtles [
-    set shape "right-handed"
-    set handedness "right"
-  ]
-  set sample-number 0
-end
 
-to go
-  ask turtles [
-   move
-  ]
-end
-
-to move
-  rt random 60
-  lt random 60
-  fd 1
-end
+  turtles-own [handedness]
 
 
-to sample
-  ask sampling-turtles [die]
-  set sample-number (sample-number + 1)
-
-
-  let circle-center one-of patches  ; Choose a center patch
-
-  let circle-radius sampling-radius  ; Define the radius of the circle
-
-
-
-
-  ; Find turtles within the circle
-  let turtles-in-circle turtles with [distance circle-center <= circle-radius]
-
-  ask turtles-in-circle [set color yellow]
-
-   ask circle-center [
-  sprout-sampling-turtles 1 [
-    set shape "circle"
-    set size 2.1 * circle-radius    ;; this is an approximation because of how size works in NetLogo
-    set color [255 0 0 100]
-    set ycor ycor + 0.2 ;; for a fine adjustment to balance the person shape artifact
+  to setup
+    clear-all
+    crt number-of-people [
+      set color green
+      set size 1.5
+      fd random-float max-pxcor
+      repeat 200 [move]
     ]
-  ]
+    ask turtles [
+     set shape "left-handed"
+     set handedness "left"
+    ]
+    ask n-of (floor (right-handed-proportion * number-of-people) / 100) turtles [
+      set shape "right-handed"
+      set handedness "right"
+    ]
+    set sample-number 0
+  end
 
-  ; Report the count
-  let num-turtles count turtles-in-circle
-  let num-right-turtles count turtles-in-circle with [handedness = "right"]
-  output-print (word " ")
-  output-print (word "Sample " sample-number)
-  output-print (word "Total Number of People: " num-turtles)
-  output-print (word "Number of Right-handed People: " num-right-turtles)
+  to go
+    ask turtles [
+     move
+    ]
+  end
 
-end
+  to move
+    rt random 60
+    lt random 60
+    fd 1
+  end
+
+
+  to sample
+    ask sampling-turtles [die]
+    set sample-number (sample-number + 1)
+
+
+    let circle-center one-of patches  ; Choose a center patch
+
+    let circle-radius sampling-radius  ; Define the radius of the circle
+
+
+
+
+    ; Find turtles within the circle
+    let turtles-in-circle turtles with [distance circle-center <= circle-radius]
+
+
+     ask circle-center [
+       sprout-sampling-turtles 1 [
+      set shape "circle"
+      set size 2.1 * circle-radius    ;; this is an approximation because of how size works in NetLogo
+      set color [255 0 0 100]
+      set ycor ycor + 0.15 ;; for a fine adjustment to balance the person shape artifact
+      ]
+    ]
+
+    ; Report the count
+    let num-turtles count turtles-in-circle
+    let num-right-turtles count turtles-in-circle with [handedness = "right"]
+    output-print (word " ")
+    output-print (word "Sample " sample-number)
+    output-print (word "Total Number of People: " num-turtles)
+    output-print (word "Number of Right-handed People: " num-right-turtles)
+
+  end
 
 
 
@@ -84,7 +84,7 @@ GRAPHICS-WINDOW
 542
 -1
 -1
-8.0
+8
 1
 10
 1
@@ -102,7 +102,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
-30.0
+30
 
 BUTTON
 50
@@ -147,7 +147,7 @@ number-of-people
 number-of-people
 0
 500
-200.0
+200
 10
 1
 NIL
@@ -162,7 +162,7 @@ sampling-radius
 sampling-radius
 0
 20
-5.0
+5
 1
 1
 NIL
@@ -177,7 +177,7 @@ right-handed-proportion
 right-handed-proportion
 0
 100
-70.0
+70
 1
 1
 %
@@ -207,7 +207,7 @@ TEXTBOX
 61
 Population composition
 16
-0.0
+0
 1
 
 TEXTBOX
@@ -217,7 +217,7 @@ TEXTBOX
 261
 Record Data
 16
-0.0
+0
 1
 
 OUTPUT
@@ -226,7 +226,6 @@ OUTPUT
 305
 550
 13
-
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -589,22 +588,22 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.4.0
+NetLogo 6.2.2
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 default
-0.0
--0.2 0 0.0 1.0
-0.0 1 1.0 0.0
-0.2 0 0.0 1.0
+0
+-0.2 0 0 1
+0 1 1 0
+0.2 0 0 1
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-1
+
 @#$#@#$#@
