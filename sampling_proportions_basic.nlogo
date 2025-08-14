@@ -1,4 +1,6 @@
-  breed [sampling-turtles sampling-turtle]
+breed [moving-turtles moving-turtle]
+breed [sampling-turtles sampling-turtle]
+
 
   globals [
   sample-number
@@ -9,7 +11,7 @@
 
   to setup
     clear-all
-    crt number-of-people [
+    create-moving-turtles number-of-people [
       set color green
       set size 1.5
       fd random-float max-pxcor
@@ -27,15 +29,15 @@
   end
 
   to go
-    ask turtles [
+    ask moving-turtles [
      move
     ]
   end
 
   to move
-    rt random 60
-    lt random 60
-    fd 1
+    right random 60
+    left random 60
+    forward 1
   end
 
 
@@ -47,8 +49,6 @@
     let circle-center one-of patches  ; Choose a center patch
 
     let circle-radius sampling-radius  ; Define the radius of the circle
-
-
 
 
     ; Find turtles within the circle
@@ -73,7 +73,6 @@
     output-print (word "Number of Right-handed People: " num-right-turtles)
 
   end
-
 
 
 @#$#@#$#@
@@ -105,9 +104,9 @@ ticks
 30
 
 BUTTON
-50
+25
 140
-230
+110
 173
 NIL
 setup\n
@@ -122,10 +121,10 @@ NIL
 1
 
 BUTTON
-50
-180
-230
-213
+165
+140
+255
+173
 NIL
 go
 T
@@ -154,10 +153,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-20
-270
-260
-303
+25
+225
+265
+258
 sampling-radius
 sampling-radius
 0
@@ -184,10 +183,10 @@ right-handed-proportion
 HORIZONTAL
 
 BUTTON
-105
-315
-177
-348
+100
+270
+172
+303
 NIL
 sample\n
 NIL
@@ -211,20 +210,20 @@ Population composition
 1
 
 TEXTBOX
-90
-245
-240
-261
+85
+195
+235
+213
 Record Data
 16
 0
 1
 
 OUTPUT
-20
-355
-305
-550
+15
+315
+280
+541
 13
 @#$#@#$#@
 ## WHAT IS IT?
