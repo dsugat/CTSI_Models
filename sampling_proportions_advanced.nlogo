@@ -72,7 +72,7 @@ end
 
 to save-data
   send-to:file "output.csv" proportions-list
-  user-message ("The data is saved on your computer as output.csv")
+  user-message ("The data will be saved on your computer as output.csv")
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -82,7 +82,7 @@ GRAPHICS-WINDOW
 544
 -1
 -1
-8
+8.0
 1
 10
 1
@@ -100,7 +100,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
-30
+30.0
 
 BUTTON
 50
@@ -145,7 +145,7 @@ number-of-people
 number-of-people
 0
 500
-200
+200.0
 10
 1
 NIL
@@ -160,7 +160,7 @@ sample-size
 sample-size
 0
 20
-15
+15.0
 1
 1
 NIL
@@ -175,7 +175,7 @@ right-handed-proportion
 right-handed-proportion
 0
 100
-70
+70.0
 1
 1
 %
@@ -205,7 +205,7 @@ TEXTBOX
 61
 Population composition
 16
-0
+0.0
 1
 
 TEXTBOX
@@ -215,7 +215,7 @@ TEXTBOX
 263
 Record Data
 16
-0
+0.0
 1
 
 OUTPUT
@@ -234,7 +234,7 @@ number-of-trials
 number-of-trials
 0
 1000
-500
+500.0
 1
 1
 NIL
@@ -273,6 +273,7 @@ NIL
 NIL
 NIL
 1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -635,22 +636,22 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.2.2
+NetLogo 6.4.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
 default
-0
--0.2 0 0 1
-0 1 1 0
-0.2 0 0 1
+0.0
+-0.2 0 0.0 1.0
+0.0 1 1.0 0.0
+0.2 0 0.0 1.0
 link direction
 true
 0
 Line -7500403 true 150 150 90 180
 Line -7500403 true 150 150 210 180
 @#$#@#$#@
-
+0
 @#$#@#$#@
