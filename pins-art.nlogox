@@ -5,18 +5,12 @@ turtles-own [my-empty-neighbor-cells-count]
 
 to setup
   ca
-  
-  ask patches with [
-    (pycor = 10 and pxcor < 10 and pxcor > -10) or
-    (pycor = -10 and pxcor < 10 and pxcor > -10) or
-    (pxcor = 10 and pycor < 10 and pycor > -10) or
-    (pxcor = -10 and pycor < 10 and pycor > -10)
-  ]
+ 
+  ask patches with [round (distancexy 0 0) = 10] [
+  set pcolor white
+]
 
 
-  [
-    set pcolor white
-  ]
   set pin-colors (list pin-color-1 pin-color-2 pin-color-3 pin-color-4 pin-color-5) 
   reset-ticks
 end
@@ -51,12 +45,15 @@ to add-a-pin-density
     set size 1.1
     set color one-of pin-colors
     
+  ;  show color
+   ; show count turtles with [color = [color] of myself and (my-empty-neighbor-cells-count > 4)]  ;;
+    
     ifelse count turtles with [color = [color] of myself] = 1 
     [
     let starting-point one-of patches with [(pcolor = white) and (count turtles-here = 0)]  
     move-to starting-point
   ][
-      if count turtles with [color = [color] of myself and (my-empty-neighbor-cells-count > 4)] > 0 [  
+      ifelse count turtles with [color = [color] of myself and (my-empty-neighbor-cells-count > 4)] > 0 [  
       let neighbor-pin one-of other turtles with [
         color = [color] of myself and (my-empty-neighbor-cells-count > 4)
         ]
@@ -64,19 +61,20 @@ to add-a-pin-density
         move-to neighbor-pin
         move-to one-of neighbors with [pcolor = black and count turtles-here = 0]
       ]
-    ]]
+    ]
+      [die]
+    ]
     show-turtle
   ]
-  
+  ask turtles [
+    set my-empty-neighbor-cells-count count neighbors with [count turtles-here = 0]
+  ]
 end
 
 
 
 to density-go
   add-a-pin-density
-  ask turtles [
-    set my-empty-neighbor-cells-count count neighbors with [count turtles-here = 0]
-  ]
   tick
 end
 
@@ -92,15 +90,15 @@ end
   <widgets>
     <view x="368" wrappingAllowedX="false" y="10" frameRate="30.0" minPycor="-70" height="566" showTickCounter="true" patchSize="4.0" fontSize="10" wrappingAllowedY="false" width="566" tickCounterLabel="ticks" maxPycor="70" updateMode="0" maxPxcor="70" minPxcor="-70"></view>
     <button x="40" y="10" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="240">setup</button>
-    <button x="40" y="460" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="116">add-a-pin-density</button>
-    <button x="35" y="510" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="120">density-go</button>
-    <button x="170" y="460" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="120">add-a-pin-random</button>
-    <button x="170" y="510" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="120">random-go</button>
     <input x="35" multiline="false" y="355" height="60" variable="pin-color-5" type="color" width="250">45.0</input>
     <input x="35" multiline="false" y="285" height="60" variable="pin-color-4" type="color" width="250">115.0</input>
     <input x="35" multiline="false" y="215" height="60" variable="pin-color-3" type="color" width="250">105.0</input>
     <input x="35" multiline="false" y="145" height="60" variable="pin-color-2" type="color" width="250">65.0</input>
     <input x="35" multiline="false" y="75" height="60" variable="pin-color-1" type="color" width="250">15.0</input>
+    <button x="35" y="450" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="120">add-a-pin-random</button>
+    <button x="165" y="450" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="120">add-a-pin-density</button>
+    <button x="35" y="500" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="120">random-go</button>
+    <button x="165" y="500" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="120">density-go</button>
   </widgets>
   <info>## WHAT IS IT?
 
